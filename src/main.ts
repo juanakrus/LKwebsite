@@ -49,7 +49,7 @@ class Cart {
     // Checkout redirection
     document.getElementById('checkoutBtn')?.addEventListener('click', () => {
       if (this.items.length > 0) {
-        window.location.href = '/checkout.html';
+        window.location.href = 'checkout.html';
       } else {
         alert('Your cart is empty!');
       }
@@ -100,7 +100,7 @@ class Cart {
         localStorage.setItem('localKitchenCustomOrder', JSON.stringify(customData));
         
         // Redirect to a specialized custom payment page
-        window.location.href = '/custom-payment.html';
+        window.location.href = 'custom-payment.html';
       });
     }
   }
