@@ -39,8 +39,8 @@
         transition: all 0.8s;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-BQBe39_3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Ds9SitEg.css">
+    <script type="module" crossorigin src="/assets/index-DVM9cVCZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BeBrv6q0.css">
   </head>
   <body>
     <header>
@@ -48,7 +48,7 @@
         <img src="/images/logo.png" alt="Local Kitchen PH Logo">
         <span>LOCAL KITCHEN PH</span>
       </a>
-      <nav>
+      <nav id="mainNav">
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="/#cakes">Cakes</a></li>
@@ -57,7 +57,14 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button class="btn btn-primary" id="viewCartBtn">View Cart <span class="cart-count" id="cartCount">0</span></button>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <button class="btn btn-primary" id="viewCartBtn">View Cart <span class="cart-count" id="cartCount">0</span></button>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </header>
 
     <!-- Cart Sidebar -->
