@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Cake Checkout | LOCAL KITCHEN PH</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      body { background-color: #faf9f4; }
+      .payment-container {
+        max-width: 1000px;
+        margin: 120px auto 60px;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 40px;
+        padding: 0 20px;
+      }
+      .summary-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        height: fit-content;
+      }
+      .form-section {
+        background: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+      .form-group { margin-bottom: 20px; }
+      .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+      .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+      .delivery-option {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        border: 2px solid #eee;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.3s;
+      }
+      .delivery-option.active { border-color: var(--primary); background: #fdfbf7; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo" style="text-decoration: none;">
+        <img src="/images/logo.png" alt="Local Kitchen PH Logo">
+        <span>LOCAL KITCHEN PH</span>
+      </a>
+    </header>
+
+    <main class="payment-container">
+      <!-- Left: Summary -->
+      <div class="summary-card">
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">Custom Order Summary</h2>
+        <div id="customSummary">
+          <!-- Data injected here -->
+        </div>
+        <div style="border-top: 2px solid #eaddc0; margin-top: 20px; padding-top: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: 800; color: var(--secondary);">
+            <span>Total</span>
+            <span id="totalDisplay">₱0</span>
+          </div>
+          <small style="color: #888; display: block; margin-top: 5px;">* Starting price. Final quote may vary.</small>
+        </div>
+      </div>
+
+      <!-- Right: Details Form -->
+      <div class="form-section">
+        <form id="finalCustomForm">
+          <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--primary); display: inline-block;">Personal Details</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required placeholder="Enter your name (Letters only)" pattern="[A-Za-z\s]+">
+              <small id="nameError" style="color: #d32f2f; display: none; font-size: 0.75rem; margin-top: 4px;">Only letters and spaces are allowed.</small>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" value="+63 " required placeholder="+63 9XX XXX XXXX">
+              <small id="phoneError" style="color: #d32f2f; display: none; font-size: 0.8rem; margin-top: 5px; font-weight: 600;">Please enter a complete 10-digit mobile number.</small>
+            </div>
+          </div>
+
+
+          <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--primary); display: inline-block;">Collection Method</h3>
+          <div style="margin-bottom: 30px;">
+            <label class="delivery-option active">
+              <input type="radio" name="deliveryMethod" value="pickup" checked>
+              <div>
+                <strong style="display: block;">Customer Pick-up</strong>
+                <small style="color: var(--text-muted);">Pick up at our Muntinlupa location</small>
+              </div>
+            </label>
+
+            <label class="delivery-option">
+              <input type="radio" name="deliveryMethod" value="courier">
+              <div>
+                <strong style="display: block;">Courier Services (Lalamove/Grab)</strong>
+                <small style="color: var(--text-muted);">Customer handles booking & courier fee</small>
+              </div>
+            </label>
+            
+            <div id="pickupDetails" class="form-group" style="padding: 15px; background: #f9f9f9; border-radius: 8px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                  <label style="font-size: 0.8rem;">Pick-up Date</label>
+                  <input type="date" name="pickupDate" id="pickupDate" required>
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem;">Pick-up Time</label>
+                  <select name="pickupTime" id="pickupTime" required>
+                    <option value="" disabled selected>Select time</option>
+                    <option value="07:00">7:00 AM</option>
+                    <option value="07:30">7:30 AM</option>
+                    <option value="08:00">8:00 AM</option>
+                    <option value="08:30">8:30 AM</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="09:30">9:30 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="10:30">10:30 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="11:30">11:30 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="12:30">12:30 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="13:30">1:30 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="14:30">2:30 PM</option>
+                    <option value="15:00">3:00 PM</option>
+                    <option value="15:30">3:30 PM</option>
+                    <option value="16:00">4:00 PM</option>
+                    <option value="16:30">4:30 PM</option>
+                    <option value="17:00">5:00 PM</option>
+                    <option value="17:30">5:30 PM</option>
+                    <option value="18:00">6:00 PM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.2rem; padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(224, 187, 108, 0.4);">
+            Confirm Inquiry Request
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Name validation (no special characters)
+      const nameInput = document.getElementById('name');
+      const nameError = document.getElementById('nameError');
+      nameInput.addEventListener('input', (e) => {
+        const value = e.target.value;
+        const cleanValue = value.replace(/[^a-zA-Z\s]/g, '');
+        if (value !== cleanValue) {
+          e.target.value = cleanValue;
+          nameError.style.display = 'block';
+        } else {
+          nameError.style.display = 'none';
+        }
+      });
+
+
+      const customOrder = JSON.parse(localStorage.getItem('localKitchenCustomOrder'));
+      if (!customOrder) window.location.href = '/personalized-cake.html';
+
+      // Render Summary
+      const summaryEl = document.getElementById('customSummary');
+      summaryEl.innerHTML = `
+        <div style="margin-bottom: 15px;">
+          <h3 style="margin-bottom: 5px;">Personalized Cake: ${customOrder.occasion}</h3>
+          <p style="color: #666; font-size: 0.9rem; margin: 2px 0;"><strong>Size:</strong> ${customOrder.size}</p>
+          <p style="color: #666; font-size: 0.9rem; margin: 2px 0;"><strong>Flavor:</strong> ${customOrder.flavor}</p>
+          <p style="color: #666; font-size: 0.9rem; margin: 2px 0;"><strong>Filling:</strong> ${customOrder.filling}</p>
+          ${customOrder.requests ? `<p style="color: #666; font-size: 0.9rem; margin: 10px 0;"><strong>Requests:</strong> ${customOrder.requests}</p>` : ''}
+          ${customOrder.ref_link ? `<p style="color: #666; font-size: 0.9rem; margin: 2px 0;"><strong>Ref Link:</strong> <a href="${customOrder.ref_link}" target="_blank" style="color: var(--primary);">View Design</a></p>` : ''}
+        </div>
+      `;
+      document.getElementById('totalDisplay').textContent = `₱${customOrder.price.toLocaleString()}`;
+
+      // Phone formatting
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        if (!value.startsWith('+63 ')) {
+          value = '+63 ' + value.replace(/^\+63\s?/, '').replace(/\D/g, '');
+        }
+        let digits = value.substring(4).replace(/\D/g, '');
+        let formatted = '+63 ';
+        if (digits.length > 0) {
+          formatted += digits.substring(0, 3);
+          if (digits.length > 3) {
+            formatted += ' ' + digits.substring(3, 6);
+            if (digits.length > 6) {
+              formatted += ' ' + digits.substring(6, 10);
+            }
+          }
+        }
+        e.target.value = formatted;
+        document.getElementById('phoneError').style.display = (digits.length > 0 && digits.length < 10) ? 'block' : 'none';
+      });
+
+      // Lead time (3 days)
+      const pickupDateInput = document.getElementById('pickupDate');
+      const today = new Date();
+      const offset = today.getTimezoneOffset() * 60000;
+      const customDate = new Date(today.getTime() + (3 * 24 * 60 * 60 * 1000));
+      const minCustomDate = (new Date(customDate - offset)).toISOString().split('T')[0];
+      pickupDateInput.min = minCustomDate;
+      pickupDateInput.value = minCustomDate;
+
+      // Submit
+      document.getElementById('finalCustomForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const phoneDigits = phoneInput.value.substring(4).replace(/\D/g, '');
+        if (phoneDigits.length < 10) {
+          alert('Please enter a complete 10-digit mobile number.');
+          return;
+        }
+
+        const formData = new FormData(e.target);
+        const finalOrder = {
+          customDetails: customOrder,
+          customer: Object.fromEntries(formData.entries())
+        };
+
+        // Generate Invoice
+        generateInvoice(finalOrder);
+
+        console.log('FINAL CUSTOM ORDER:', finalOrder);
+        alert(`Inquiry Sent! Thank you, ${finalOrder.customer.name}. Your invoice has been downloaded. We will contact you at ${finalOrder.customer.phone} to finalize the design and provide a formal quote.`);
+        
+        localStorage.removeItem('localKitchenCustomOrder');
+        window.location.href = '/';
+      });
+
+      function generateInvoice(order) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+          orientation: 'landscape',
+          unit: 'pt',
+          format: [576, 288]
+        });
+
+        // Background / Vibe
+        doc.setFillColor(250, 249, 244); // #faf9f4
+        doc.rect(0, 0, 576, 288, 'F');
+        
+        doc.setDrawColor(224, 187, 108); // var(--primary)
+        doc.setLineWidth(15);
+        doc.line(0, 7.5, 576, 7.5); // Top accent border
+
+        // Branding
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.text('LOCAL KITCHEN PH', 40, 45);
+        
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(102, 102, 102);
+        doc.text('PREMIUM PERSONALIZED CAKE INQUIRY', 40, 60);
+
+        // Header Line
+        doc.setDrawColor(224, 187, 108);
+        doc.setLineWidth(1);
+        doc.line(40, 70, 536, 70);
+
+        // Customer Info (Left)
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CUSTOMER DETAILS', 40, 90);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.text(`Name: ${order.customer.name}`, 40, 105);
+        doc.text(`Phone: ${order.customer.phone}`, 40, 118);
+        doc.text(`Method: ${order.customer.deliveryMethod.toUpperCase()}`, 40, 131);
+        doc.text(`Schedule: ${order.customer.pickupDate} @ ${order.customer.pickupTime}`, 40, 144);
+
+        // Courier Info (if applicable)
+        if (order.customer.deliveryMethod === 'courier') {
+          doc.setFont('helvetica', 'bold');
+          doc.text('PICK-UP FOR COURIER:', 40, 165);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.text('Address: 217 Pleasant Drive, Bayanan, Muntinlupa', 40, 178);
+          doc.text('Contact: Joanne Cruz (09202929032)', 40, 188);
+          doc.setFontSize(9);
+        }
+
+        // Order Details (Center)
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.text('CAKE SPECIFICATIONS', 200, 90);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        
+        doc.text(`Occasion: ${order.customDetails.occasion}`, 200, 105);
+        doc.text(`Size: ${order.customDetails.size}`, 200, 118);
+        doc.text(`Flavor: ${order.customDetails.flavor}`, 200, 131);
+        doc.text(`Filling: ${order.customDetails.filling}`, 200, 144);
+        
+        if (order.customDetails.requests) {
+          const req = `Requests: ${order.customDetails.requests}`;
+          const splitReq = doc.splitTextToSize(req, 200);
+          doc.text(splitReq, 200, 160);
+        }
+
+        // Payment Info (Right)
+        doc.setFont('helvetica', 'bold');
+        doc.text('PAYMENT DETAILS', 420, 90);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.text('GCash: 0920 2929 032', 420, 105);
+        doc.text('Maya: 0920 2929 032', 420, 115);
+        
+        // QR Code Placeholder
+        doc.setDrawColor(200, 200, 200);
+        doc.rect(420, 125, 80, 80);
+        doc.setFontSize(7);
+        doc.text('SCAN QR CODE', 432, 165);
+        doc.text('TO PAY', 448, 175);
+        doc.setFontSize(9);
+
+        // Totals (Bottom)
+        const totalY = 240;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(194, 153, 67); // Gold-ish
+        doc.text(`STARTING PRICE: P${order.customDetails.price.toLocaleString()}`, 350, totalY + 35);
+
+        // Footer
+        doc.setTextColor(102, 102, 102);
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'italic');
+        doc.text('Thank you for your inquiry! We will contact you shortly to finalize details.', 40, 270);
+
+        // Review instead of download
+        const blob = doc.output('blob');
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      }
+    </script>
+  </body>
+</html>
