@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout | Local Kitchen PH</title>
     <link rel="stylesheet" href="/src/style.css">
+    <style>
+      @media (max-width: 768px) {
+        .checkout-grid-container {
+          grid-template-columns: 1fr !important;
+          gap: 20px !important;
+        }
+        main { padding-top: 80px !important; }
+      }
+    </style>
   </head>
   <body style="background-color: #faf9f4;">
     <header>
@@ -13,6 +22,19 @@
         <img src="/images/logo.png" alt="Local Kitchen PH Logo">
         <span>LOCAL KITCHEN PH</span>
       </a>
+      <button class="menu-toggle" id="menuToggle" style="margin-left: auto;">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#cakes">Cakes</a></li>
+          <li><a href="/#cupcakes">Cupcakes</a></li>
+          <li><a href="/personalized-cake.html">Personalized Cake</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main style="padding-top: 100px;">
@@ -22,7 +44,7 @@
         </a>
       </div>
       <section class="order-section">
-        <div class="order-form-container" style="max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+        <div class="order-form-container checkout-grid-container" style="max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
           
           <!-- Order Summary -->
           <div style="background: #fff; padding: 30px; border-radius: 12px; border: 1px solid #eee;">

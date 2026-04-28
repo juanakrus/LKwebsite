@@ -11,12 +11,22 @@
     <style>
       body { background-color: #faf9f4; }
       .payment-container {
-        max-width: 1000px;
-        margin: 120px auto 60px;
         display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 40px;
+        grid-template-columns: 350px 1fr;
+        gap: 30px;
+        margin: 120px auto 60px;
+        max-width: 1000px;
         padding: 0 20px;
+      }
+      
+      @media (max-width: 900px) {
+        .payment-container {
+          grid-template-columns: 1fr;
+          margin-top: 80px;
+        }
+        .summary-card {
+          position: static;
+        }
       }
       .summary-card {
         background: #fff;
@@ -54,6 +64,18 @@
         <img src="/images/logo.png" alt="Local Kitchen PH Logo">
         <span>LOCAL KITCHEN PH</span>
       </a>
+      <button class="menu-toggle" id="menuToggle" style="margin-left: auto;">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#cakes">Cakes</a></li>
+          <li><a href="/#cupcakes">Cupcakes</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main class="payment-container">

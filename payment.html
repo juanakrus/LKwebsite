@@ -12,14 +12,21 @@
     <style>
       .payment-container {
         display: grid;
-        grid-template-columns: 1fr 1.5fr;
-        gap: 50px;
+        grid-template-columns: 350px 1fr;
+        gap: 30px;
+        margin-top: 40px;
         max-width: 1200px;
         margin: 60px auto;
         padding: 0 20px;
       }
-      @media (max-width: 968px) {
-        .payment-container { grid-template-columns: 1fr; }
+      
+      @media (max-width: 900px) {
+        .payment-container {
+          grid-template-columns: 1fr;
+        }
+        .summary-card {
+          position: static;
+        }
       }
       .summary-card {
         background: #fdfbf7;
@@ -52,7 +59,6 @@
       .delivery-option input { width: 20px; height: 20px; }
       
       .hidden { display: none; }
-      .delivery-option.active { border-color: var(--primary); background: #fdfbf7; }
       
       .payment-card {
         cursor: pointer;
@@ -107,13 +113,21 @@
   </head>
   <body>
     <header>
-      <nav>
-        <div class="logo">
-          <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-            <img src="/images/logo.png" alt="Local Kitchen Logo" style="height: 50px; width: auto;">
-            <span style="color: var(--primary); font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem;">LOCAL KITCHEN PH</span>
-          </a>
-        </div>
+      <a href="/" class="logo" style="text-decoration: none;">
+        <img src="/images/logo.png" alt="Local Kitchen PH Logo">
+        <span>LOCAL KITCHEN PH</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" style="margin-left: auto;">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#cakes">Cakes</a></li>
+          <li><a href="/#cupcakes">Cupcakes</a></li>
+        </ul>
       </nav>
     </header>
 
