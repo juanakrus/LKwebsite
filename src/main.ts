@@ -227,6 +227,8 @@ document.querySelectorAll('section').forEach(section => {
   observer.observe(section);
 });
 
+const style = document.createElement('style');
+style.textContent = `.fade-in { opacity: 1 !important; transform: translateY(0) !important; }`;
 document.head.appendChild(style);
 
 // Mobile Menu Toggle Logic
