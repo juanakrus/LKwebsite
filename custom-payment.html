@@ -71,9 +71,10 @@
       </button>
       <nav id="mainNav">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#cakes">Cakes</a></li>
-          <li><a href="index.html#cupcakes">Cupcakes</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#cakes">Cakes</a></li>
+          <li><a href="/#cupcakes">Cupcakes</a></li>
+          <li><a href="/personalized-cake.html">Personalized Cake</a></li>
         </ul>
       </nav>
     </header>
@@ -371,6 +372,22 @@
         const blob = doc.output('blob');
         const url = URL.createObjectURL(blob);
         window.open(url, '_blank');
+      }
+    </script>
+    <script>
+      const menuToggle = document.getElementById('menuToggle');
+      const mainNav = document.getElementById('mainNav');
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => {
+          mainNav.classList.toggle('active');
+          menuToggle.classList.toggle('active');
+        });
+        mainNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            menuToggle.classList.remove('active');
+          });
+        });
       }
     </script>
   </body>

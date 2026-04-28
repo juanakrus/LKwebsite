@@ -32,12 +32,15 @@ h1, h2, h3 {
 
 section {
   padding: 80px 10%;
-  max-width: 1400px;
+}
+
+.section-inner {
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 1200px) {
-  section { padding: 60px 5%; }
+  section { padding: 60px 6%; }
 }
 
 .btn {
@@ -80,6 +83,8 @@ section {
 header {
   position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   height: var(--header-height);
   padding: 0 5%;
   display: flex;
@@ -89,6 +94,7 @@ header {
   backdrop-filter: blur(10px);
   z-index: 1000;
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-sizing: border-box;
 }
 
 .logo {
@@ -153,12 +159,13 @@ nav a:hover {
 
 /* Hero */
 .hero {
-  height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
-  padding-top: 100px;
+  padding-top: calc(var(--header-height) + 40px);
+  padding-bottom: 60px;
 }
 
 .hero-content {
