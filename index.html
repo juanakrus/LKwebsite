@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Kitchen PH | Specialty Cakes & Cupcakes</title>
+    <meta name="description" content="Local Kitchen PH specializes in handcrafted specialty cakes and premium cupcakes. Best sellers: Carrot Walnut, Mango Chiffon, and S'mores Cake.">
+    <style>
+      .personalized-cta {
+        position: relative;
+        display: inline-block;
+        padding: 25px 50px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: white !important;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 50px;
+        text-decoration: none;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 15px 35px rgba(224, 187, 108, 0.4);
+        margin-top: 20px;
+      }
+      .personalized-cta:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 45px rgba(224, 187, 108, 0.6);
+      }
+      .personalized-cta .shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      }
+      .personalized-cta:hover .shine {
+        left: 100%;
+        transition: all 0.8s;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BQBe39_3.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Ds9SitEg.css">
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo" style="text-decoration: none;">
+        <img src="/images/logo.png" alt="Local Kitchen PH Logo">
+        <span>LOCAL KITCHEN PH</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="/#cakes">Cakes</a></li>
+          <li><a href="/#cupcakes">Cupcakes</a></li>
+          <li><a href="/personalized-cake.html">Personalized Cake</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="btn btn-primary" id="viewCartBtn">View Cart <span class="cart-count" id="cartCount">0</span></button>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h2>Your Order</h2>
+        <button id="closeCart" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be injected here -->
+      </div>
+      <div class="cart-total">
+        <button id="emptyCartBtn" style="width: 100%; padding: 10px; background: none; border: 1px solid #ff4444; color: #ff4444; border-radius: 4px; cursor: pointer; margin-bottom: 10px; font-size: 0.8rem;">Empty Cart</button>
+        <h3>Total <span id="cartTotal">₱0</span></h3>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" id="checkoutBtn">Review Order & Checkout</button>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-content">
+          <h1>Sweet Moments, Handcrafted.</h1>
+          <p>Local Kitchen PH specializes in the finest specialty cakes and premium cupcakes. Every creation is handcrafted with love for your special celebrations.</p>
+          <div class="hero-btns">
+            <a href="#cakes" class="btn btn-primary">Explore Our Signature Collection</a>
+            <a href="#story" class="btn btn-outline">Our Story</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/images/specialty_hero.png" alt="Specialty Cakes and Cupcakes by Local Kitchen PH">
+        </div>
+      </section>
+
+      <section class="menu-section" id="cakes">
+        <h2>Specialty Cakes</h2>
+        <div class="menu-grid">
+          <div class="menu-card" data-name="Carrot Walnut Cake" data-price="950">
+            <img src="/images/carrot_cake.jpg" class="card-hover-img" alt="Carrot Cake">
+            <h3>Carrot Walnut <span class="price">₱950</span></h3>
+            <p>Premium Carrot Cake with smooth cream cheese frosting, topped with handcrafted carrot toppers and a walnut crumble border.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Mango Cream Chiffon" data-price="950">
+            <img src="/images/mango_chiffon.jpg" class="card-hover-img" alt="Mango Cake">
+            <h3>Mango Cream <span class="price">₱950</span></h3>
+            <p>Fluffy chiffon cake topped with fresh mango cubes, creamy white swirls, and a rich chocolate drizzle.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="S'mores Specialty Cake" data-price="950">
+            <img src="/images/smores_cake.jpg" class="card-hover-img" alt="S'mores Cake">
+            <h3>S'mores Specialty <span class="price">₱950</span></h3>
+            <p>Indulgent chocolate cake crowned with toasted marshmallows, premium chocolate bars, and crisp graham crackers.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Ube Macapuno Cake" data-price="950">
+            <img src="/images/ube_macapuno.jpg" class="card-hover-img" alt="Ube Macapuno Cake">
+            <h3>Ube Macapuno <span class="price">₱950</span></h3>
+            <p>Authentic Ube cake with a vibrant purple crumb, topped with creamy macapuno strings and elegant ube whipped swirls.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Classic Chocolate Cake" data-price="900">
+            <img src="/images/classic_chocolate.jpg" class="card-hover-img" alt="Chocolate Cake">
+            <h3>Classic Chocolate <span class="price">₱900</span></h3>
+            <p>Rich, moist chocolate cake with a signature ganache drip, topped with premium chocolate confections and gourmet sprinkles.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Red Velvet Cake" data-price="900">
+            <img src="/images/red_velvet.jpg" class="card-hover-img" alt="Red Velvet">
+            <h3>Red Velvet <span class="price">₱900</span></h3>
+            <p>Elegant Red Velvet cake with a delicate cocoa flavor, beautifully finished with white cream cheese whipped swirls.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-section" id="cupcakes" style="background-color: var(--bg-light);">
+        <h2>Handcrafted Cupcakes</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-inline: auto;">Our premium cupcakes are handcrafted with the same dedication and quality as our signature cakes, offering the perfect bite-sized indulgence for any occasion.</p>
+        <div class="menu-grid">
+          <div class="menu-card" data-name="Ube Macapuno Cupcakes" data-price="550">
+            <h3>Ube Macapuno <span class="price">₱550</span></h3>
+            <p>Classic ube cake topped with macapuno strings and ube frosting.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Mango Chocolate Cupcakes" data-price="550">
+            <h3>Mango Chocolate <span class="price">₱550</span></h3>
+            <p>Chocolate cupcake with fresh mango core and whipped frosting.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Red Velvet White Choco Cupcakes" data-price="550">
+            <h3>Red Velvet <span class="price">₱550</span></h3>
+            <p>Red velvet base with white chocolate chips and cream cheese frosting.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Carrot Walnut Cupcakes" data-price="550">
+            <h3>Carrot Walnut <span class="price">₱550</span></h3>
+            <p>Bite-sized version of our best-seller with walnuts and cream cheese.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Chocolate S'mores Cupcakes" data-price="550">
+            <h3>Chocolate S'mores <span class="price">₱550</span></h3>
+            <p>Chocolate cake with graham crust, topped with toasted marshmallows.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="menu-card" data-name="Classic Chocolate Cupcakes" data-price="550">
+            <h3>Classic Chocolate <span class="price">₱550</span></h3>
+            <p>Our rich, signature chocolate cupcake with velvety chocolate frosting.</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section" id="story" style="background: var(--primary); color: white; padding: 100px 20px; text-align: center; margin-top: 50px;">
+        <div class="story-content" style="max-width: 800px; margin: 0 auto;">
+          <h2 style="color: white; border-bottom: 2px solid rgba(255,255,255,0.3); display: inline-block; padding-bottom: 15px; margin-bottom: 30px;">Our Story</h2>
+          <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px;">Local Kitchen PH started with a simple passion: bringing the warmth and quality of a handcrafted sweet treat to your celebrations. What began as a small family kitchen in Muntinlupa has grown into a specialized source for premium cakes and cupcakes loved across the Philippines.</p>
+          <p style="font-size: 1.2rem; line-height: 1.8;">Every cake we frost and every cupcake we prepare is a testament to our commitment to quality, taste, and the joy of sharing something sweet with the people you love.</p>
+        </div>
+      </section>
+
+      <section class="cta-section" style="padding: 120px 20px; text-align: center; background: #faf9f4;">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 20px; color: #333;">Your Vision, Our Creation</h2>
+          <p style="color: #666; font-size: 1.2rem; margin-bottom: 40px;">Dreaming of something truly unique? We love bringing special ideas to life.</p>
+          <a href="/personalized-cake.html" class="personalized-cta">
+            Want a personalized cake? Let's make it work!
+            <div class="shine"></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact">
+        <h2>Get in Touch</h2>
+        <p>Have questions or want to inquire about a custom design? We're here to help.</p>
+        <div class="contact-grid">
+          <a href="https://m.me/localkitchenph" target="_blank" class="btn btn-primary contact-btn">
+            Message Us on Messenger
+          </a>
+          <a href="tel:09202929032" class="btn btn-outline contact-btn">
+            Call Us: 0920 2929 032
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Local Kitchen PH. All Rights Reserved.</p>
+      <div class="social-links" style="display: flex; gap: 20px; justify-content: center; margin-top: 15px;">
+        <a href="https://www.facebook.com/localkitchenph" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">FACEBOOK</a>
+        <a href="https://www.instagram.com/localkitchenph" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">INSTAGRAM</a>
+      </div>
+    </footer>
+
+    <script>
+      // Personalized Cake Form UI Logic
+      const occasionSelect = document.getElementById('cakeOccasion');
+      const occasionSpecify = document.getElementById('occasionSpecify');
+      const baseFlavorSelect = document.getElementById('baseFlavor');
+      const cakeTypeSelect = document.getElementById('cakeType');
+      const fudgyOption = document.getElementById('fudgyOption');
+
+      if (occasionSelect) {
+        occasionSelect.addEventListener('change', () => {
+          occasionSpecify.style.display = occasionSelect.value === 'Others' ? 'block' : 'none';
+          if (occasionSelect.value === 'Others') occasionSpecify.required = true;
+          else occasionSpecify.required = false;
+        });
+      }
+
+      if (baseFlavorSelect) {
+        baseFlavorSelect.addEventListener('change', () => {
+          const validFudgyFlavors = ['Chocolate', 'Matcha', 'Vanilla', 'Red Velvet'];
+          const isFudgyAllowed = validFudgyFlavors.includes(baseFlavorSelect.value);
+          
+          if (!isFudgyAllowed) {
+            if (cakeTypeSelect.value === 'Fudgy') cakeTypeSelect.value = 'Light';
+            fudgyOption.disabled = true;
+            fudgyOption.textContent = 'Fudgy (Not available for this flavor)';
+          } else {
+            fudgyOption.disabled = false;
+            fudgyOption.textContent = 'Fudgy';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
